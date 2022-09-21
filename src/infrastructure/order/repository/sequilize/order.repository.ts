@@ -26,11 +26,14 @@ export default class OrderRepository implements OrderRepositoryInterface {
   }
 
   async update(entity: Order): Promise<void> {
+    const order = await this.find(entity.id);
+    if (!order) {
+      throw new Error("Order not found");
+    }
+
     await OrderModel.update(
       {
         customer_id: entity.customerId,
-        items: entity.items,
-        total: entity.total,
       },
       {
         where: {
@@ -38,12 +41,26 @@ export default class OrderRepository implements OrderRepositoryInterface {
         },
       }
     );
+
+    if (entity.items) {
+      entity.items.map(
+        async (item) =>
+          await OrderItemModel.upsert({
+            id: item.id,
+            order_id: entity.id,
+            name: item.name,
+            price: item.price,
+            product_id: item.productId,
+            quantity: item.quantity,
+          })
+      );
+    }
   }
 
   async find(id: string): Promise<Order> {
     const orderModel = await OrderModel.findOne({
       where: { id },
-      include: ["items"],
+      include: [{ model: OrderItemModel }],
     });
     if (!orderModel) {
       throw new Error("Order not found");
