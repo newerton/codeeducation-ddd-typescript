@@ -6,6 +6,7 @@ import {
   ForeignKey,
   BelongsTo,
   HasMany,
+  DataType,
 } from "sequelize-typescript";
 import CustomerModel from "../../../customer/repository/sequelize/customer.model";
 import OrderItemModel from "./order-item.model";
@@ -16,11 +17,11 @@ import OrderItemModel from "./order-item.model";
 })
 export default class OrderModel extends Model {
   @PrimaryKey
-  @Column
+  @Column({ type: DataType.STRING })
   declare id: string;
 
   @ForeignKey(() => CustomerModel)
-  @Column({ allowNull: false })
+  @Column({ type: DataType.STRING, allowNull: false })
   declare customer_id: string;
 
   @BelongsTo(() => CustomerModel)
@@ -29,7 +30,6 @@ export default class OrderModel extends Model {
   @HasMany(() => OrderItemModel)
   declare items: OrderItemModel[];
 
-  @Column({ allowNull: false })
+  @Column({ type: DataType.INTEGER, allowNull: false })
   declare total: number;
 }
-
