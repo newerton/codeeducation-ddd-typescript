@@ -6,7 +6,7 @@
   "dependencies": {
     "class-transformer": "^0.5.1",
     "reflect-metadata": "^0.2.2",
-    "sequelize": "^6.37.7",
+    "sequelize": "^6.37.8",
     "sequelize-typescript": "^2.1.6",
     "sqlite3": "^5.1.7",
     "uuid": "^11.1.0"
