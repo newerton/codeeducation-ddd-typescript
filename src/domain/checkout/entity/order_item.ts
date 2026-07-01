@@ -1,43 +1,43 @@
-import OrderItemInterface from "./order_item.interface";
+import type OrderItemInterface from "./order_item.interface";
 
 export default class OrderItem implements OrderItemInterface {
-  private _id: string;
-  private _productId: string;
-  private _name: string;
-  private _price: number;
-  private _quantity: number;
+	private _id: string;
+	private _productId: string;
+	private _name: string;
+	private _price: number;
+	private _quantity: number;
 
-  constructor(
-    id: string,
-    name: string,
-    price: number,
-    productId: string,
-    quantity: number
-  ) {
-    this._id = id;
-    this._name = name;
-    this._price = price;
-    this._productId = productId;
-    this._quantity = quantity;
-  }
+	constructor(
+		id: string,
+		name: string,
+		price: number,
+		productId: string,
+		quantity: number,
+	) {
+		this._id = id;
+		this._name = name;
+		this._price = price;
+		this._productId = productId;
+		this._quantity = quantity;
+	}
 
-  get id(): string {
-    return this._id;
-  }
+	get id(): string {
+		return this._id;
+	}
 
-  get name(): string {
-    return this._name;
-  }
+	get name(): string {
+		return this._name;
+	}
 
-  get productId(): string {
-    return this._productId;
-  }
+	get productId(): string {
+		return this._productId;
+	}
 
-  get quantity(): number {
-    return this._quantity;
-  }
+	get quantity(): number {
+		return this._quantity;
+	}
 
-  get price(): number {
-    return this._price;
-  }
+	get price(): number {
+		return this._price;
+	}
 }
